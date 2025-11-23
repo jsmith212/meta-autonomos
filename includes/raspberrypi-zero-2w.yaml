@@ -1,0 +1,10 @@
+header:
+  version: 20
+  includes:
+    - includes/raspberrypi.yaml
+
+machine: raspberrypi0-2w-64
+
+local_conf_header:
+  raspberrypi0-2w-64: |
+    MENDER_SWAP_PART_SIZE_MB="512"

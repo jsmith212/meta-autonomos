@@ -1,0 +1,30 @@
+header:
+  version: 20
+
+repos:
+  meta-raspberrypi:
+    url: "https://github.com/agherzan/meta-raspberrypi.git"
+    path: "sources/meta-raspberrypi"
+
+  meta-lts-mixins:
+    url: https://git.yoctoproject.org/meta-lts-mixins
+    branch: null
+    commit: "66ceeebd047d7fdfc8668b300319a76da8ae257d"
+    path: "sources/meta-lts-mixins"
+
+  meta-mender-community:
+    url: "https://github.com/mendersoftware/meta-mender-community.git"
+    path: "sources/meta-mender-community"
+    layers:
+      meta-mender-raspberrypi:
+
+local_conf_header:
+  raspberrypi: |
+    RPI_USE_U_BOOT = "1"
+    ENABLE_UART = "1"
+    MENDER_BOOT_PART_SIZE_MB = "200"
+    MENDER_STORAGE_TOTAL_SIZE_MB = "10000"
+    MACHINE_FEATURES:append = " serial wifi bluetooth"
+    IMAGE_INSTALL:append = " kernel-image kernel-devicetree"
+    IMAGE_FSTYPES:remove = " rpi-sdimg"
+    LICENSE_FLAGS_ACCEPTED = "synaptics-killswitch"

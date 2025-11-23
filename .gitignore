@@ -1,0 +1,5 @@
+.venv/
+build/
+sources/
+.kas_shell_history
+secrets.yaml

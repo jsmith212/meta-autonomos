@@ -1,0 +1,9 @@
+[Unit]
+Description=Bring up wlan0 in client mode using wpa_supplicant
+
+[Service]
+Type=forking
+ExecStart=wpa_supplicant -i wlan0 -B -c /etc/wpa_supplicant.conf
+
+[Install]
+WantedBy=network.target
