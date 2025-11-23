@@ -2,7 +2,7 @@ build:
   kas-container build reference.yaml
 
 clean:
-  kas-container clean reference.yaml
+  kas-container purge reference.yaml
 
 spotless: clean
   rm -rf build/

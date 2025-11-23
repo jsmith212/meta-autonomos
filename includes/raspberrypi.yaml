@@ -8,8 +8,8 @@ repos:
 
   meta-lts-mixins:
     url: https://git.yoctoproject.org/meta-lts-mixins
-    branch: null
-    commit: "66ceeebd047d7fdfc8668b300319a76da8ae257d"
+    # Workaround for U-Boot patch incompatibility with raspberrypi layer
+    branch: scarthgap/u-boot
     path: "sources/meta-lts-mixins"
 
   meta-mender-community:
