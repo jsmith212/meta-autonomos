@@ -7,7 +7,6 @@ inherit packagegroup
 PACKAGEGROUP_PACKAGES = "\
     zsh \
     tmux \
-    vim \
     oh-my-zsh \
     zsh-autosuggestions \
     zsh-syntax-highlighting \

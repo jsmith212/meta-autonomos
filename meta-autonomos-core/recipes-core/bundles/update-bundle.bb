@@ -23,3 +23,7 @@ RAUC_SLOT_rootfs[fstype] = "ext4"
 # Signing keys - use project-configured keys or default development keys
 RAUC_KEY_FILE = "${@d.getVar('AUTONOMOS_RAUC_KEY_DIR') + '/' + d.getVar('AUTONOMOS_RAUC_KEY_FILE') if d.getVar('AUTONOMOS_RAUC_KEY_DIR') else d.getVar('THISDIR') + '/../../files/rauc-example-keys/' + d.getVar('AUTONOMOS_RAUC_KEY_FILE')}"
 RAUC_CERT_FILE = "${@d.getVar('AUTONOMOS_RAUC_KEY_DIR') + '/' + d.getVar('AUTONOMOS_RAUC_CERT_FILE') if d.getVar('AUTONOMOS_RAUC_KEY_DIR') else d.getVar('THISDIR') + '/../../files/rauc-example-keys/' + d.getVar('AUTONOMOS_RAUC_CERT_FILE')}"
+RAUC_KEYRING_FILE = "${@d.getVar('AUTONOMOS_RAUC_KEY_DIR') + '/' + d.getVar('AUTONOMOS_RAUC_KEYRING_FILE') if d.getVar('AUTONOMOS_RAUC_KEY_DIR') else d.getVar('THISDIR') + '/../../files/rauc-example-keys/' + d.getVar('AUTONOMOS_RAUC_KEYRING_FILE')}"
+
+# Generate casync bundle with chunk store for delta updates
+RAUC_CASYNC_BUNDLE = "1"
