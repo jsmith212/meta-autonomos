@@ -79,6 +79,40 @@ casync-package-delta old-store new-store bundle output="update.tar.gz":
     echo "Created {{output}} ($TARBALL_SIZE)"
     echo "Deploy with: tar -xf {{output}} -C /data"
 
+# Package full update: all chunks + bundle manifest into a tarball
+# Use for initial loading or development when no base version exists
+# Extract on device with: tar -xf update.tar.gz -C /data
+[group('ota')]
+[script('bash')]
+casync-package store bundle output="update.tar.gz":
+    STAGING=$(mktemp -d)
+    trap "rm -rf $STAGING" EXIT
+
+    # Stage all chunks in updates.castr/
+    mkdir -p "$STAGING/updates.castr"
+    COUNT=0
+    SIZE=0
+    for chunk in $(find {{store}} -name '*.cacnk' 2>/dev/null); do
+        prefix=$(basename $(dirname $chunk))
+        mkdir -p "$STAGING/updates.castr/$prefix"
+        cp "$chunk" "$STAGING/updates.castr/$prefix/"
+        SIZE=$((SIZE + $(stat -c%s "$chunk")))
+        COUNT=$((COUNT + 1))
+    done
+
+    # Stage bundle manifest in rauc/
+    mkdir -p "$STAGING/rauc"
+    cp "{{bundle}}" "$STAGING/rauc/"
+
+    # Create tarball
+    tar -czf "{{output}}" -C "$STAGING" updates.castr rauc
+
+    SIZE_MB=$((SIZE / 1024 / 1024))
+    TARBALL_SIZE=$(du -h "{{output}}" | cut -f1)
+    echo "Packaged $COUNT chunks (${SIZE_MB}MB) + bundle manifest"
+    echo "Created {{output}} ($TARBALL_SIZE)"
+    echo "Deploy with: tar -xf {{output}} -C /data"
+
 # Show casync chunk store statistics
 [group('ota')]
 [script('bash')]
