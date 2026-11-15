@@ -8,7 +8,7 @@ machine: bblue
 
 repos:
   meta-ti:
-    url: "git://git.yoctoproject.org/meta-ti"
+    url: "https://git.yoctoproject.org/meta-ti"
     branch: "master"
     path: "sources/meta-ti"
     layers:
